@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - El Castillo de las Sombras</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="game-content">
+            <h1>LA GRAN PUERTA</h1>
+            <img src="img/castle-door.png" alt="Puerta del Castillo" class="challenge-image">
+            <p class="prompt">Te encuentras ante la imponente entrada del Castillo de las Sombras. Un eco antiguo susurra en el viento.</p>
+            <p>Para demostrar tu valía y poder entrar, el guardián de la puerta te pide que te presentes. Escribe tu nombre de aventurero.</p>
+            <form id="door1-form">
+                <input type="text" id="password-input" placeholder="Tu nombre de aventurero..." autocomplete="off" required>
+                <button type="submit">ENTRAR</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('door1-form').addEventListener('submit', handleDoor1);
+    </script>
+</body>
+</html>

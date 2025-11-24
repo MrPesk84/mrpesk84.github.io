@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - Depuración del Sistema</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para el área de código */
+        #code-editor {
+            width: 90%;
+            height: 250px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid var(--color-oro);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            padding: 10px;
+            margin: 1rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="player-name-display" class="player-name"></div>
+        <div id="game-content">
+            <h1>Depura el Sistema</h1>
+            <p class="prompt">Eres un analista del Gremio de Tecnomagos. Un sistema crucial está fallando. El algoritmo que debería sumar los números pares del 1 al 10 está devolviendo un resultado erróneo.</p>
+            <p>Tu misión: detecta los errores en el siguiente fragmento de código, corrígelos para calcular el resultado correcto. El número que obtengas será la clave para desbloquear el siguiente sector.</p>
+            
+            <textarea id="code-editor">
+INICIO
+  suma = 0
+  PARA i DESDE 1 HASTA 10 HACER
+    SI i ES IMPAR ENTONCES
+      suma = suma + i
+    FIN SI
+  FIN PARA
+  ESCRIBIR suma
+FIN
+            </textarea>
+
+            <p>Introduce la clave (el resultado correcto):</p>
+            <form id="code-puzzle-form">
+                <input type="text" id="password-input" placeholder="Clave numérica..." autocomplete="off" required>
+                <button type="submit">DESBLOQUEAR</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPlayerName();
+        });
+        document.getElementById('code-puzzle-form').addEventListener('submit', checkCodePuzzle);
+    </script>
+</body>
+</html>

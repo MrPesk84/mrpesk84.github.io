@@ -1,0 +1,145 @@
+/* --- Importar Fuente Medieval --- */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+/* --- Variables de Color --- */
+:root {
+    --color-fondo: #3d3a3a;
+    --color-contenedor: #00000080; /* Negro semi-transparente */
+    --color-texto: #e0e0e0;
+    --color-oro: #ffd700;
+    --fuente-principal: 'MedievalSharp', cursive;
+}
+
+/* --- Estilos Generales --- */
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    background-image: url('img/stone-wall.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    color: var(--color-texto);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.container {
+    background-color: var(--color-contenedor);
+    border: 2px solid var(--color-oro);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 20px var(--color-oro);
+}
+
+h1 {
+    color: var(--color-oro);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px #000;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.prompt {
+    color: #ffc107;
+    font-style: italic;
+}
+
+/* --- Imágenes --- */
+.challenge-image {
+    max-width: 200px;
+    height: auto;
+    margin: 1rem auto;
+    border: 3px solid var(--color-oro);
+    border-radius: 5px;
+}
+
+/* --- Formularios --- */
+input[type="text"], input[type="password"] {
+    font-family: var(--fuente-principal);
+    background-color: #333;
+    border: 1px solid var(--color-oro);
+    color: var(--color-texto);
+    padding: 10px;
+    margin-top: 1rem;
+    width: 80%;
+    max-width: 300px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-oro);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* --- Nombre del Jugador --- */
+.player-name {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-contenedor);
+    padding: 10px;
+    border: 1px solid var(--color-oro);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* --- Estilos para el Puzzle de Frases --- */
+.sentence-container {
+    list-style-type: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    border: 1px dashed var(--color-oro);
+}
+
+.sentence-container li {
+    background-color: #333;
+    padding: 12px;
+    margin: 5px auto;
+    width: 90%;
+    cursor: grab;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    border: 1px solid #555;
+}
+
+.sentence-container li:hover {
+    background-color: #444;
+}
+
+.sentence-container li.dragging {
+    opacity: 0.5;
+}
+
+.sentence-container li.incorrect {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+    font-weight: bold;
+}

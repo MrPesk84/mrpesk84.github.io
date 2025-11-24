@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - El Guardián Lógico</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/guardian-logico.css"> <!-- Estilos específicos para este puzzle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="player-name-display" class="player-name"></div>
+        <div id="game-content">
+            <h1>El Guardián Lógico</h1>
+
+            <!-- Parte 1: Introducir número de jugadores -->
+            <div id="guardian-part-1">
+                <p class="prompt">Un golem de piedra bloquea la puerta. En su pecho hay una inscripción con unas reglas y una ranura.</p>
+                <div class="rules-box">
+                    <p>"Si el número de almas en tu grupo es par, el azul es tu senda."</p>
+                    <p>"Si es impar, el rojo te aguarda."</p>
+                    <p>"Pero si tu grupo excede las cinco almas, el verde es vuestro destino."</p>
+                </div>
+                <p>Introduce el número de viajeros en tu grupo:</p>
+                <form id="guardian-form-1">
+                    <input type="number" id="group-size-input" placeholder="Nº de viajeros..." min="1" required>
+                    <button type="submit">DECIDIR</button>
+                </form>
+            </div>
+
+            <!-- Parte 2: Elegir sobre (oculto) -->
+            <div id="guardian-part-2" class="hidden">
+                <p class="prompt">El golem retumba y tres gemas en su pecho comienzan a brillar. Elige tu senda.</p>
+                <div class="envelope-container">
+                    <div class="envelope red" onclick="openEnvelope('rojo')">Gema Roja</div>
+                    <div class="envelope blue" onclick="openEnvelope('azul')">Gema Azul</div>
+                    <div class="envelope green" onclick="openEnvelope('verde')">Gema Verde</div>
+                </div>
+            </div>
+
+            <!-- Parte 3: Acertijo binario (oculto) -->
+            <div id="guardian-part-3" class="hidden">
+                <p class="prompt">La gema elegida proyecta un holograma con un mensaje cifrado en un antiguo dialecto de los autómatas.</p>
+                <p>Traduce el mensaje:</p>
+                <div class="code-block">01001000 01001111 01001100 01000001</div>
+
+                <div class="hint-box">
+                    <p><strong>Pista:</strong> Cada bloque de 8 números es una letra en código ASCII. Los códigos van en orden alfabético. ¡Fíjate en cómo cambia el final de cada código!</p>
+                    <div class="hint-code"><code>01000001 → A</code></div>
+                    <div class="hint-code"><code>01000010 → B</code></div>
+                    <div class="hint-code"><code>01000011 → C</code></div>
+                </div>
+
+                <form id="guardian-form-2">
+                    <input type="text" id="binary-solution-input" placeholder="Palabra traducida..." autocomplete="off" required>
+                    <button type="submit">PRONUNCIAR</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/main.js"></script> <!-- Script principal para funciones comunes -->
+    <script src="js/guardian-logico.js"></script> <!-- Script específico para este puzzle -->
+</body>
+</html>

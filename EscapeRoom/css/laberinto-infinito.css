@@ -1,0 +1,120 @@
+/* Estilos para el puzzle "El Laberinto Infinito" */
+
+.hidden {
+    display: none !important; /* Asegura que se oculte */
+}
+
+#labyrinth-container {
+    position: relative;
+    width: fit-content; /* Ajustar al tamaño del grid */
+    margin: 2rem auto;
+    border: 2px solid var(--color-oro);
+    box-shadow: 0 0 10px var(--color-oro);
+}
+
+#labyrinth-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px); /* 10 columnas de 30px */
+    grid-template-rows: repeat(10, 30px);    /* 10 filas de 30px */
+    background-color: #222; /* Fondo del laberinto */
+}
+
+.grid-cell {
+    width: 30px;
+    height: 30px;
+    background-color: #333; /* Camino */
+    border: 1px solid #444; /* Bordes de celda */
+    box-sizing: border-box; /* Incluir padding y border en el tamaño */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.grid-cell.wall {
+    background-color: #555; /* Pared */
+}
+
+.grid-cell.path-taken {
+    background-color: #004d00; /* Camino recorrido */
+}
+
+.grid-cell.exit {
+    font-weight: bold;
+    color: var(--color-oro);
+    background-color: #6a0000; /* Fondo para las salidas */
+}
+
+.grid-cell.exit.loop {
+    background-color: #006a00; /* Fondo especial para la salida LOOP */
+}
+
+#robot {
+    position: absolute;
+    width: 28px; /* Ligeramente más pequeño que la celda */
+    height: 28px;
+    background-color: #007bff; /* Color del robot */
+    border-radius: 50%; /* Forma de círculo */
+    transition: top 0.1s linear, left 0.1s linear; /* Animación más rápida */
+    z-index: 10;
+    top: 1px; /* Ajuste inicial */
+    left: 1px; /* Ajuste inicial */
+}
+
+.controls {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los botones se envuelvan */
+    justify-content: center;
+    gap: 1rem;
+}
+
+.command-button, #reset-button {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-oro);
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+    font-weight: bold;
+    min-width: 120px; /* Ancho mínimo para botones */
+}
+
+.command-button:hover, #reset-button:hover {
+    transform: scale(1.05);
+}
+
+.result-message {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-oro);
+}
+
+.algorithm-box {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px dashed var(--color-oro);
+    padding: 15px;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.algorithm-box p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.algorithm-box code {
+    display: block;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    padding: 10px;
+    border-left: 3px solid #007bff; /* Color azul para destacar el código */
+    white-space: pre-wrap; /* Para que el pre se ajuste al ancho */
+}

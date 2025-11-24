@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - El Mensaje Cifrado</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="player-name-display" class="player-name"></div>
+        <div id="game-content">
+            <h1>El Mensaje Cifrado</h1>
+            <p class="prompt">Interceptas un mensaje secreto, pero las líneas están desordenadas. Reconstruye el mensaje original para revelar la palabra de poder.</p>
+            
+            <ul id="sentence-list" class="sentence-container">
+                <li draggable="true"><b>R</b>emojas el cepillo con agua.</li>
+                <li draggable="true"><b>A</b>comodas el cepillo sobre los dientes.</li>
+                <li draggable="true"><b>O</b>btienes la pasta y destapas el tubo.</li>
+                <li draggable="true"><b>M</b>ueves el cepillo por todas las superficies durante 2 minutos.</li>
+                <li draggable="true"><b>O</b>rdenas el baño: tapas la pasta.</li>
+                <li draggable="true"><b>P</b>reparas el cepillo y el vaso.</li>
+                <li draggable="true"><b>G</b>iras el tubo y pones una pequeña cantidad en el cepillo.</li>
+                <li draggable="true"><b>D</b>ejas el cepillo enjuagado y escurrido.</li>
+                <li draggable="true"><b>R</b>evisas que todo quede limpio.</li>
+                <li draggable="true"><b>R</b>ecoges el cepillo y lo llevas a la boca.</li>
+                <li draggable="true"><b>A</b>clara con agua la boca.</li>
+            </ul>
+
+            <p>Introduce la palabra de poder para descifrar el mensaje:</p>
+            <form id="puzzle-form">
+                <input type="text" id="password-input" placeholder="Palabra de poder..." autocomplete="off" required>
+                <button type="submit">DESCIFRAR</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPlayerName();
+            initializeSentencePuzzle();
+        });
+        document.getElementById('puzzle-form').addEventListener('submit', checkSentenceOrder);
+    </script>
+</body>
+</html>

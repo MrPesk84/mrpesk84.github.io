@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - El Laberinto Infinito</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/laberinto-infinito.css"> <!-- Estilos específicos para este puzzle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div id="player-name-display" class="player-name"></div>
+        <div id="game-content">
+            <h1>El Laberinto Infinito</h1>
+            <p class="prompt">Un autómata está atrapado en un laberinto. Debes guiarlo siguiendo un algoritmo para que encuentre la salida correcta. ¡Entiende cómo los bucles repiten acciones!</p>
+            
+            <div id="labyrinth-container">
+                <div id="labyrinth-grid"></div>
+                <div id="robot" class="robot"></div>
+            </div>
+
+            <div class="algorithm-box">
+                <p><strong>Algoritmo del Autómata:</strong></p>
+                <code>
+                    <pre>
+INICIO BUCLE
+  REPITE 3 VECES:
+    AVANZA 2 CASILLAS
+    GIRA A LA DERECHA
+    AVANZA 1 CASILLA
+    GIRA A LA IZQUIERDA
+    AVANZA 1 CASILLA
+FIN BUCLE
+                    </pre>
+                </code>
+                <p>Ejecuta las instrucciones paso a paso para que el autómata encuentre la clave.</p>
+            </div>
+
+            <div class="controls">
+                <button class="command-button" data-command="move" data-value="2">AVANZAR 2</button>
+                <button class="command-button" data-command="turn" data-value="right">GIRAR DERECHA</button>
+                <button class="command-button" data-command="move" data-value="1">AVANZAR 1</button>
+                <button class="command-button" data-command="turn" data-value="left">GIRAR IZQUIERDA</button>
+                <button id="reset-button">REINICIAR</button>
+            </div>
+
+            <div id="result-message" class="result-message"></div>
+
+            <form id="labyrinth-form" class="hidden"> <!-- Oculto inicialmente -->
+                <input type="text" id="labyrinth-key-input" placeholder="Clave encontrada..." autocomplete="off" required readonly>
+                <button type="submit">DESCUBRIR</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script> <!-- Script principal para funciones comunes -->
+    <script src="js/laberinto-infinito.js"></script> <!-- Script específico para este puzzle -->
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - ¡Has Escapado!</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <!-- Librería jsPDF para generar el PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="player-name-display" class="player-name"></div>
+        <div id="game-content">
+            <h1>¡LO HAS LOGRADO!</h1>
+            <p class="prompt">¡Enhorabuena, valiente aventurero!</p>
+            <p>Has superado todos los acertijos y desafíos del Castillo de las Sombras.</p>
+            <p>Reclama tu pergamino como prueba de tu ingenio y coraje.</p>
+            <button id="generate-pdf-btn">RECLAMAR PERGAMINO</button>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        // Asignar el evento al botón de generar PDF
+        document.getElementById('generate-pdf-btn').addEventListener('click', generateCertificate);
+    </script>
+</body>
+</html>
