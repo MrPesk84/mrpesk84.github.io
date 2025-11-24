@@ -64,7 +64,310 @@
 
     <main class="content">
         <h2>UP.3 Programación Orientada a Objetos (POO) en PHP</h2>
-        <p>Contenido de la unidad...</p>
+        <p>En esta unidad exploraremos el paradigma de la Programación Orientada a Objetos, uno de los pilares del desarrollo de software moderno y la base sobre la que se construyen frameworks como Laravel.</p>
+    
+        <hr>
+    
+        <h3>Sesión 1: Fundamentos de la POO</h3>
+        <h4>Introducción teórica a POO</h4>
+        <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que organiza el código en "objetos", los cuales pueden contener tanto datos (propiedades) como comportamiento (métodos). Piensa en ello como construir con bloques de LEGO: cada tipo de bloque (clase) tiene una forma y función, y puedes crear estructuras complejas (aplicaciones) combinando esos bloques (objetos).</p>
+        
+        <h4>Clases y Objetos Básicos</h4>
+        <p>Una <strong>clase</strong> es una plantilla o un molde para crear objetos. Define las propiedades y métodos que tendrán los objetos de ese tipo. Un <strong>objeto</strong> es una instancia de una clase, es decir, una "copia" concreta creada a partir de la plantilla, con sus propios valores en las propiedades.</p>
+        <p><strong>Actividad 1:</strong> Crea tu primer guerrero.</p>
+        <pre><code>&lt;?php
+    // 1. Define la clase Guerrero
+    class Guerrero {
+        // Propiedades (los datos de nuestro objeto)
+        public $nombre;
+        public $vida = 100;
+        public $fuerza = 10;
+    }
+    
+    // 2. Crea dos objetos (instancias) a partir de la clase
+    $heroe = new Guerrero();
+    $heroe->nombre = "Aragorn";
+    
+    $villano = new Guerrero();
+    $villano->nombre = "Lurtz";
+    
+    // 3. Muestra sus propiedades
+    echo "El héroe se llama " . $heroe->nombre;
+    echo "&lt;br&gt;";
+    echo "El villano se llama " . $villano->nombre;
+    
+    var_dump($heroe);
+    var_dump($villano);
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 2: Dando Vida a los Objetos</h3>
+        <h4>Constructores, Métodos y $this</h4>
+        <p>El <strong>constructor</strong> es un método especial (`__construct`) que se llama automáticamente al crear un objeto, ideal para inicializar sus propiedades. Los <strong>métodos</strong> son funciones dentro de una clase que definen su comportamiento. La pseudovariable <strong>`$this`</strong> se usa dentro de un método para referirse al propio objeto que lo está llamando.</p>
+    
+        <h4>Implementación en PHP + Encapsulación</h4>
+        <p>La <strong>encapsulación</strong> es un principio clave de la POO que consiste en proteger las propiedades de un objeto para que no puedan ser modificadas desde fuera de la clase de forma incontrolada. Se usan los modificadores de acceso: `public` (accesible desde cualquier lugar), `protected` (accesible desde la clase y sus herederas) y `private` (solo accesible desde la propia clase).</p>
+        <p><strong>Actividad 2:</strong> Mejora la clase `Guerrero`.</p>
+        <pre><code>&lt;?php
+    class Guerrero {
+        // Propiedades ahora privadas
+        private $nombre;
+        private $vida;
+        private $fuerza;
+    
+        // Constructor para inicializar las propiedades
+        public function __construct($nombre, $fuerza) {
+            $this->nombre = $nombre;
+            $this->vida = 100; // Vida inicial siempre es 100
+            $this->fuerza = $fuerza;
+            echo "¡" . $this->nombre . " ha entrado en combate!&lt;br&gt;";
+        }
+    
+        // Método para atacar a otro guerrero
+        public function atacar(Guerrero $oponente) {
+            echo $this->nombre . " ataca a " . $oponente->getNombre() . ".&lt;br&gt;";
+            $oponente->recibirDano($this->fuerza);
+        }
+    
+        // Método para gestionar el daño recibido
+        public function recibirDano($dano) {
+            $this->vida -= $dano;
+            echo $this->nombre . " recibe " . $dano . " de daño. Vida restante: " . $this->vida . "&lt;br&gt;";
+        }
+    
+        // "Getter" para obtener el nombre (propiedad privada)
+        public function getNombre() {
+            return $this->nombre;
+        }
+    }
+    
+    $heroe = new Guerrero("Aragorn", 15);
+    $villano = new Guerrero("Lurtz", 12);
+    
+    $heroe->atacar($villano);
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 3: Diseñando Nuestro Mundo</h3>
+        <h4>Diseño UML inicial y Relaciones entre clases (Composición)</h4>
+        <p><strong>UML (Lenguaje Unificado de Modelado)</strong> nos ayuda a diseñar visualmente la estructura de nuestras clases y cómo se relacionan. Una relación de <strong>Composición</strong> ("tiene un") ocurre cuando un objeto está compuesto por otros. Por ejemplo, un `Guerrero` "tiene un" `Arma`.</p>
+        <p><strong>Actividad 3:</strong> ¡Equipa a tu guerrero!</p>
+        <pre><code>&lt;?php
+    class Arma {
+        private $nombre;
+        private $dano;
+    
+        public function __construct($nombre, $dano) {
+            $this->nombre = $nombre;
+            $this->dano = $dano;
+        }
+    
+        public function getDano() {
+            return $this->dano;
+        }
+    }
+    
+    class Guerrero {
+        // ... propiedades anteriores ...
+        private $arma; // Nueva propiedad para la composición
+    
+        public function __construct($nombre, $fuerza) {
+            // ...
+        }
+    
+        // Método para equipar un arma
+        public function equiparArma(Arma $arma) {
+            $this->arma = $arma;
+            echo $this->nombre . " ha equipado " . $arma->getNombre() . ".&lt;br&gt;";
+        }
+    
+        public function atacar(Guerrero $oponente) {
+            // El daño total ahora es la fuerza + el daño del arma
+            $danoTotal = $this->fuerza + $this->arma->getDano();
+            echo $this->nombre . " ataca a " . $oponente->getNombre() . ".&lt;br&gt;";
+            $oponente->recibirDano($danoTotal);
+        }
+        // ... resto de métodos ...
+    }
+    
+    $espada = new Arma("Andúril", 25);
+    $heroe = new Guerrero("Aragorn", 15);
+    $heroe->equiparArma($espada);
+    
+    $villano = new Guerrero("Lurtz", 12);
+    $heroe->atacar($villano);
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 4: Familias de Clases</h3>
+        <h4>Herencia, Polimorfismo y Clases Abstractas</h4>
+        <p>La <strong>Herencia</strong> (`extends`) permite que una clase (hija) herede propiedades y métodos de otra (padre), promoviendo la reutilización de código. El <strong>Polimorfismo</strong> es la capacidad de los objetos de diferentes clases de responder al mismo mensaje (llamada de método) de formas distintas. Una <strong>Clase Abstracta</strong> es una clase que no puede ser instanciada y sirve como base para otras clases, pudiendo forzar a sus hijas a implementar ciertos <strong>métodos abstractos</strong>.</p>
+        <p><strong>Actividad 4:</strong> Crea la clase `Mago` y una clase base `Personaje`.</p>
+        <pre><code>&lt;?php
+    abstract class Personaje {
+        protected $nombre;
+        protected $vida;
+    
+        public function __construct($nombre) {
+            $this->nombre = $nombre;
+            $this->vida = 100;
+        }
+    
+        public function getNombre() {
+            return $this->nombre;
+        }
+    
+        // Método abstracto que las clases hijas DEBEN implementar
+        abstract public function atacar(Personaje $oponente);
+    }
+    
+    class Guerrero extends Personaje {
+        protected $fuerza;
+        public function __construct($nombre, $fuerza) {
+            parent::__construct($nombre); // Llama al constructor del padre
+            $this->fuerza = $fuerza;
+        }
+    
+        public function atacar(Personaje $oponente) {
+            echo $this->nombre . " ataca con su espada a " . $oponente->getNombre() . ".&lt;br&gt;";
+            // ... lógica de daño ...
+        }
+    }
+    
+    class Mago extends Personaje {
+        protected $mana;
+        public function __construct($nombre, $mana) {
+            parent::__construct($nombre);
+            $this->mana = $mana;
+        }
+    
+        public function atacar(Personaje $oponente) {
+            echo $this->nombre . " lanza un hechizo a " . $oponente->getNombre() . ".&lt;br&gt;";
+            // ... lógica de daño mágico ...
+        }
+    }
+    
+    $heroe = new Guerrero("Aragorn", 15);
+    $mago = new Mago("Gandalf", 50);
+    
+    $heroe->atacar($mago);
+    $mago->atacar($heroe);
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 5: Organizando el Código</h3>
+        <h4>Namespaces, Autoload y Estructura de Carpetas</h4>
+        <p>Los <strong>Namespaces</strong> (espacios de nombres) evitan colisiones de nombres entre clases y organizan el código. El <strong>Autoloading</strong> es una técnica que permite cargar automáticamente los ficheros de las clases cuando se necesitan, sin tener que hacer `require` o `include` manualmente. Esto se logra con una función como `spl_autoload_register`.</p>
+        <p><strong>Actividad 5:</strong> Organiza el proyecto en carpetas.</p>
+        <p>Crea la siguiente estructura de carpetas y mueve las clases a sus respectivos ficheros:</p>
+        <pre>
+    /proyecto
+    |-- src/
+    |   |-- Personajes/
+    |   |   |-- Personaje.php
+    |   |   |-- Guerrero.php
+    |   |   |-- Mago.php
+    |   |-- Items/
+    |   |   |-- Arma.php
+    |-- index.php
+        </pre>
+        <p>Añade namespaces a tus clases (ej: `namespace App\Personajes;`) y usa este código en `index.php` para cargarlas:</p>
+        <pre><code>&lt;?php
+    // index.php
+    spl_autoload_register(function ($class) {
+        // Convierte el namespace en una ruta de fichero
+        // App\Personajes\Guerrero -> src/Personajes/Guerrero.php
+        $path = 'src/' . str_replace('App\\', '', $class) . '.php';
+        $path = str_replace('\\', '/', $path);
+    
+        if (file_exists($path)) {
+            require $path;
+        }
+    });
+    
+    use App\Personajes\Guerrero;
+    use App\Personajes\Mago;
+    
+    $heroe = new Guerrero("Aragorn", 15);
+    $mago = new Mago("Gandalf", 50);
+    // ...
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 6: Código a Prueba de Fallos</h3>
+        <h4>Excepciones y Validación Robusta</h4>
+        <p>Las <strong>Excepciones</strong> son un mecanismo para manejar errores de forma controlada. Cuando ocurre un error, se "se lanza" (`throw`) una excepción, y esta puede ser "capturada" (`catch`) por un bloque de código superior para tratar el error sin que el programa se detenga bruscamente.</p>
+        <p><strong>Actividad 6:</strong> Evita que un `Mago` equipe una `Espada`.</p>
+        <pre><code>&lt;?php
+    // Dentro de la clase Mago
+    public function equiparArma(Arma $arma) {
+        // Un mago no puede equipar espadas, ¡lanzamos una excepción!
+        throw new Exception($this->nombre . " es un mago y no puede equipar armas físicas.");
+    }
+    
+    // En index.php
+    $mago = new Mago("Gandalf", 50);
+    $espada = new Arma("Glamdring", 30);
+    
+    try {
+        $mago->equiparArma($espada);
+    } catch (Exception $e) {
+        echo "¡Error! " . $e->getMessage();
+    }
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 7 (Avanzado): Contratos y Código Reutilizable</h3>
+        <h4>Interfaces y Traits</h4>
+        <p>Una <strong>Interfaz</strong> es un "contrato" que define qué métodos debe implementar una clase, pero no cómo. Un <strong>Trait</strong> es un mecanismo para reutilizar métodos en clases independientes y no relacionadas por herencia.</p>
+        <p><strong>Actividad 7 (Opcional):</strong> Crea una interfaz `Dañable` y un trait `ConEscudo`.</p>
+        <pre><code>&lt;?php
+    interface Dañable {
+        public function recibirDano($dano);
+    }
+    
+    trait ConEscudo {
+        public function bloquearAtaque() {
+            echo $this->nombre . " bloquea el ataque con su escudo.&lt;br&gt;";
+        }
+    }
+    
+    // La clase Personaje ahora implementa la interfaz
+    abstract class Personaje implements Dañable {
+        // ...
+    }
+    
+    // La clase Guerrero ahora usa el trait
+    class Guerrero extends Personaje {
+        use ConEscudo;
+        // ...
+    }
+    
+    $heroe = new Guerrero("Boromir", 20);
+    $heroe->bloquearAtaque(); // Método del Trait
+    ?&gt;</code></pre>
+    
+        <hr>
+    
+        <h3>Sesión 8: El Combate Completo</h3>
+        <h4>Actividad Final Integradora</h4>
+        <p>¡Es hora de juntar todas las piezas! Crea un script `combate.php` que haga lo siguiente:</p>
+        <ol>
+            <li>Crea una instancia de `Guerrero` y una de `Mago`.</li>
+            <li>Equipa a cada uno con su arma o poder correspondiente.</li>
+            <li>Simula un combate por turnos usando un bucle `while`.</li>
+            <li>En cada turno, un personaje ataca al otro.</li>
+            <li>El combate termina cuando la vida de uno de los dos llega a 0 o menos.</li>
+            <li>Muestra un mensaje con el ganador del combate.</li>
+        </ol>
+        <p>Este ejercicio final te obligará a usar objetos, herencia, polimorfismo y la gestión del estado de los objetos para crear una pequeña simulación funcional.</p>
+    
     </main>
 
     <script src="js/main.js"></script>
