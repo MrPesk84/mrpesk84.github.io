@@ -1,38 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const menuLinks = document.querySelectorAll('#menu-list a');
-    const homeContent = document.getElementById('home-content');
-    const contentSections = document.querySelectorAll('.content-section');
+  // --- LÓGICA PARA EL CAMBIO DE TAMAÑO DE FUENTE ---
 
-    // Función para mostrar el contenido
-    function showContent(contentId) {
-        // Ocultar contenido inicial
-        homeContent.style.display = 'none';
+  const increaseButton = document.getElementById('font-increase');
+  const decreaseButton = document.getElementById('font-decrease');
+  const resetButton = document.getElementById('font-reset');
+  const htmlElement = document.documentElement; // Seleccionamos el tag <html>
 
-        // Ocultar todas las secciones de contenido
-        contentSections.forEach(section => {
-            section.style.display = 'none';
-        });
+  increaseButton.addEventListener('click', function() {
+    changeFontSize(1); // Aumenta en 1px la base
+  });
 
-        // Mostrar la sección de contenido correcta
-        const targetSection = document.getElementById(contentId);
-        if (targetSection) {
-            targetSection.style.display = 'block';
-        }
+  decreaseButton.addEventListener('click', function() {
+    changeFontSize(-1); // Disminuye en 1px la base
+  });
+
+  resetButton.addEventListener('click', function() {
+    htmlElement.style.fontSize = ''; // Resetea al valor por defecto del CSS
+  });
+
+  function changeFontSize(amount) {
+    let currentSize = parseFloat(getComputedStyle(htmlElement).fontSize);
+    let newSize = currentSize + amount;
+    // Ponemos límites para no hacer la fuente demasiado grande o pequeña
+    if (newSize >= 12 && newSize <= 24) {
+      htmlElement.style.fontSize = newSize + 'px';
     }
+  }
 
-    // Añadir listeners a los enlaces del menú
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
+  // --- LÓGICA PARA EL SELECTOR DE UNIDADES DE PROGRAMACIÓN (UP) ---
 
-            // Quitar la clase 'active' de todos los enlaces
-            menuLinks.forEach(link => link.classList.remove('active'));
-            
-            // Añadir la clase 'active' al enlace clickado
-            this.classList.add('active');
+  const upSelector = document.getElementById('up-selector');
 
-            const contentId = this.getAttribute('data-content');
-            showContent(contentId);
-        });
-    });
+  upSelector.addEventListener('change', function() {
+    const selectedUP = upSelector.value;
+    if (selectedUP) {
+      // Si se ha seleccionado una opción válida, navegar a esa página
+      window.location.href = selectedUP;
+    }
+  });
+
 });
