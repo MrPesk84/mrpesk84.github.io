@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entendiendo el Backtracking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Entendiendo el Backtracking con Metáforas</h1>
+    </header>
+    <main>
+        <article class="metaphor">
+            <h2>La Metáfora del Laberinto</h2>
+            <p>Imagina que estás en un laberinto y quieres encontrar la salida. El backtracking es como una estrategia para no perderte.</p>
+            <ol>
+                <li>Eliges un camino y avanzas.</li>
+                <li>En cada nueva intersección, dejas una marca para recordar que has pasado por ahí y qué dirección tomaste.</li>
+                <li>Si llegas a un callejón sin salida, no te preocupas. Simplemente <strong>vuelves sobre tus pasos (haces "backtrack")</strong> hasta la última intersección donde tenías más de una opción.</li>
+                <li>Una vez allí, eliges un camino que no habías probado antes.</li>
+                <li>Repites este proceso hasta que encuentres la salida.</li>
+            </ol>
+            <p>El backtracking en programación es exactamente eso: un algoritmo que prueba soluciones candidatas y las descarta si no llevan a una solución final, retrocediendo para probar otras opciones.</p>
+        </article>
+
+        <article class="metaphor">
+            <h2>La Metáfora del Árbol de Decisiones</h2>
+            <p>Piensa en cada problema como un gran árbol. El tronco es el punto de partida y cada rama es una decisión que puedes tomar.</p>
+            <ul>
+                <li><strong>Raíz:</strong> El estado inicial del problema.</li>
+                <li><strong>Ramas:</strong> Las posibles decisiones o pasos a seguir.</li>
+                <li><strong>Hojas:</strong> Los posibles resultados finales.</li>
+            </ul>
+            <p>El backtracking explora este árbol de decisiones de forma ordenada. Desciende por una rama (toma una serie de decisiones) hasta llegar a una hoja. Si la hoja es una solución válida, ¡genial! Si no lo es, el algoritmo "poda" esa rama, retrocede al nodo anterior (la decisión anterior) y explora la siguiente rama disponible.</p>
+            <p>Es una forma eficiente de explorar todas las posibilidades sin tener que generar todas las combinaciones de antemano.</p>
+        </article>
+
+        <div class="interactive-zone">
+            <button id="exampleBtn">Ver un Ejemplo Clásico</button>
+            <div id="exampleContent" class="hidden">
+                <h3>El Problema de las 8 Reinas</h3>
+                <p>Un ejemplo famoso es el "Problema de las 8 Reinas", donde tienes que colocar 8 reinas en un tablero de ajedrez sin que ninguna pueda atacar a otra.</p>
+                <p>El algoritmo de backtracking haría lo siguiente:</p>
+                <ol>
+                    <li>Coloca la primera reina en la primera casilla.</li>
+                    <li>Coloca la segunda reina en la primera casilla segura de la siguiente fila.</li>
+                    <li>Continúa así. Si en algún momento no puede colocar una reina en una fila, <strong>retrocede</strong> a la fila anterior y mueve la reina de esa fila a una nueva posición segura.</li>
+                    <li>Repite el proceso hasta que las 8 reinas estén en el tablero.</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Creado para explicar el concepto de Backtracking de forma sencilla.</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
