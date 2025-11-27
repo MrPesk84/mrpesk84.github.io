@@ -11,29 +11,107 @@
         <h1>Entendiendo el Backtracking con Metáforas</h1>
     </header>
     <main>
-        <article class="metaphor">
-            <h2>La Metáfora del Laberinto</h2>
-            <p>Imagina que estás en un laberinto y quieres encontrar la salida. El backtracking es como una estrategia para no perderte.</p>
+        <article class="intro">
+            <h2>¿Qué es el Backtracking? (Introducción Teórica)</h2>
+            <p>El backtracking, o vuelta atrás, es una técnica de diseño de algoritmos para resolver problemas de manera sistemática. Se basa en los siguientes pasos:</p>
             <ol>
-                <li>Eliges un camino y avanzas.</li>
-                <li>En cada nueva intersección, dejas una marca para recordar que has pasado por ahí y qué dirección tomaste.</li>
-                <li>Si llegas a un callejón sin salida, no te preocupas. Simplemente <strong>vuelves sobre tus pasos (haces "backtrack")</strong> hasta la última intersección donde tenías más de una opción.</li>
-                <li>Una vez allí, eliges un camino que no habías probado antes.</li>
-                <li>Repites este proceso hasta que encuentres la salida.</li>
+                <li><strong>Explorar:</strong> Se construye una solución paso a paso. En cada paso, se elige una opción entre varias posibles.</li>
+                <li><strong>Validar:</strong> Se comprueba si la elección actual puede conducir a una solución válida.</li>
+                <li><strong>Retroceder (Backtrack):</strong> Si la elección no es válida o lleva a un callejón sin salida, se deshace esa elección y se prueba la siguiente opción disponible en el paso anterior.</li>
+                <li><strong>Finalizar:</strong> El proceso termina cuando se encuentra una solución completa o cuando se han explorado todas las posibilidades sin éxito.</li>
             </ol>
-            <p>El backtracking en programación es exactamente eso: un algoritmo que prueba soluciones candidatas y las descarta si no llevan a una solución final, retrocediendo para probar otras opciones.</p>
+            <p>Es especialmente útil en problemas de optimización y de satisfacción de restricciones, como puzzles, juegos y planificación.</p>
+        </article>
+
+        <article class="metaphor-analysis">
+            <h2>Análisis de las Metáforas según la Teoría</h2>
+            <p>Siguiendo las directrices vistas en clase sobre el uso de metáforas en la enseñanza de la informática, vamos a analizar el enfoque que hemos utilizado.</p>
+            
+            <h4>Tipo de Organizador</h4>
+            <p>Las metáforas del laberinto y del árbol de decisiones actúan como un <strong>organizador previo de tipo comparativo</strong>. La razón es que no partimos de cero; un estudiante de DAM ya tiene conocimientos sobre lo que es un laberinto o un árbol. La metáfora no presenta un concepto general nuevo (como haría un organizador expositivo), sino que <strong>establece vínculos y paralelismos</strong> entre ese conocimiento previo y familiar (el laberinto) y el concepto nuevo y abstracto que queremos explicar (el algoritmo de backtracking).</p>
+
+            <h4>Naturaleza del Concepto</h4>
+            <p>El concepto a explicar es el "backtracking". Según la clasificación del PDF, la naturaleza de este concepto se puede considerar como <strong>algo tangible</strong>. Aunque un algoritmo es abstracto, el PDF usa como ejemplo de concepto tangible la "memoria dinámica", que también es abstracta pero se puede describir a través de sus elementos (punteros, celdas) y las acciones que se realizan sobre ellos (asignar, liberar).</p>
+            <p>De la misma forma, el backtracking es un proceso con elementos y acciones definibles:</p>
+            <ul>
+                <li><strong>Elementos (Sustantivos):</strong> Un estado inicial, nodos, caminos, decisiones, una solución parcial, una solución final.</li>
+                <li><strong>Acciones (Verbos):</strong> Explorar un camino, validar una decisión, añadir a la solución, retroceder (backtrack), encontrar una solución.</li>
+            </ul>
+            <p>Al poder descomponer el concepto en estas partes y acciones concretas, podemos aplicar una metáfora sobre un concepto tangible, como es la del laberinto, donde también hay elementos (caminos, muros, salida) y acciones (avanzar, volver atrás).</p>
         </article>
 
         <article class="metaphor">
-            <h2>La Metáfora del Árbol de Decisiones</h2>
-            <p>Piensa en cada problema como un gran árbol. El tronco es el punto de partida y cada rama es una decisión que puedes tomar.</p>
+            <h3>La Metáfora del Laberinto</h3>
+            <p>La estrategia para resolver un laberinto es un ejemplo perfecto de backtracking. A continuación, enlazamos los elementos del mundo real con los conceptos informáticos:</p>
             <ul>
-                <li><strong>Raíz:</strong> El estado inicial del problema.</li>
-                <li><strong>Ramas:</strong> Las posibles decisiones o pasos a seguir.</li>
-                <li><strong>Hojas:</strong> Los posibles resultados finales.</li>
+                <li><b>Elemento real:</b> Estar perdido en un laberinto. <br><b>Elemento informático:</b> El estado inicial de un problema a resolver.</li>
+                <li><b>Elemento real:</b> Elegir un camino en una intersección. <br><b>Elemento informático:</b> Probar una posible solución parcial.</li>
+                <li><b>Elemento real:</b> Dejar una marca para no repetir el camino. <br><b>Elemento informático:</b> Marcar un nodo como "visitado" para no entrar en bucles.</li>
+                <li><b>Elemento real:</b> Llegar a un callejón sin salida. <br><b>Elemento informático:</b> Darse cuenta de que la solución parcial actual no es válida.</li>
+                <li><b>Elemento real:</b> Volver sobre tus pasos hasta la última intersección. <br><b>Elemento informático:</b> Realizar <strong>backtrack</strong>, deshaciendo la última decisión y volviendo al estado anterior.</li>
+                <li><b>Elemento real:</b> Encontrar la salida. <br><b>Elemento informático:</b> Encontrar una solución completa y válida al problema.</li>
             </ul>
-            <p>El backtracking explora este árbol de decisiones de forma ordenada. Desciende por una rama (toma una serie de decisiones) hasta llegar a una hoja. Si la hoja es una solución válida, ¡genial! Si no lo es, el algoritmo "poda" esa rama, retrocede al nodo anterior (la decisión anterior) y explora la siguiente rama disponible.</p>
-            <p>Es una forma eficiente de explorar todas las posibilidades sin tener que generar todas las combinaciones de antemano.</p>
+            <h4>Ejemplo en Pseudocódigo</h4>
+            <pre><code>
+funcion resolverLaberinto(posicionActual):
+  // Caso base: Si hemos encontrado la salida, ¡éxito!
+  si posicionActual es la SALIDA:
+    retornar verdadero
+
+  // Marcamos la celda actual como visitada para no volver a pasar por ella.
+  marcar posicionActual como VISITADA
+
+  // Exploramos los caminos posibles (Norte, Sur, Este, Oeste)
+  para cada proximoPaso adyacente a posicionActual:
+    // Si el camino es válido (no es una pared y no ha sido visitado)
+    si proximoPaso es valido:
+      // Movemos al siguiente paso (descendemos por la "rama")
+      si resolverLaberinto(proximoPaso) es verdadero:
+        retornar verdadero // La solución fue encontrada por este camino
+
+  // Si ningún camino desde aquí lleva a la salida, hacemos backtrack.
+  // En el contexto del laberinto, no es necesario "desmarcar" la celda
+  // si solo buscamos un camino, pero en otros problemas es clave.
+  retornar falso // Indicamos que este camino fue un callejón sin salida
+            </code></pre>
+        </article>
+
+        <article class="metaphor">
+            <h3>La Metáfora del Árbol de Decisiones</h3>
+            <p>También podemos ver el problema como un árbol de decisiones, donde cada rama es una elección.</p>
+            <ul>
+                <li><b>Elemento real:</b> El tronco del árbol. <br><b>Elemento informático:</b> El estado inicial del problema (la raíz).</li>
+                <li><b>Elemento real:</b> Una rama que sale de un nudo. <br><b>Elemento informático:</b> Una posible decisión o paso a seguir.</li>
+                <li><b>Elemento real:</b> Una hoja del árbol. <br><b>Elemento informático:</b> Un resultado final (puede ser una solución válida o no).</li>
+                <li><b>Elemento real:</b> Bajar por una rama hasta llegar a una hoja seca (sin fruto). <br><b>Elemento informático:</b> Explorar una secuencia de decisiones que no lleva a una solución.</li>
+                <li><b>Elemento real:</b> "Podar" esa rama seca y volver al nudo anterior para bajar por otra. <br><b>Elemento informático:</b> Descartar la rama de decisiones no válida y <strong>retroceder</strong> para explorar una alternativa.</li>
+            </ul>
+            <h4>Ejemplo en Pseudocódigo</h4>
+            <pre><code>
+funcion resolverConBacktracking(solucionParcial):
+  // Caso base: Si la solución parcial ya es una solución completa y válida.
+  si solucionParcial es una SOLUCION_COMPLETA:
+    mostrar solucionParcial
+    retornar verdadero
+
+  // Generamos las posibles decisiones/ramas para el siguiente paso.
+  para cada proximaDecision posible:
+    // 1. Tomar la decisión (avanzar por la rama).
+    añadir proximaDecision a solucionParcial
+
+    // 2. Validar: ¿Es una decisión prometedora?
+    si solucionParcial es VALIDA:
+      // 3. Explorar: Llamada recursiva para seguir construyendo la solución.
+      si resolverConBacktracking(solucionParcial) es verdadero:
+        retornar verdadero // Se encontró una solución por esta rama.
+
+    // 4. Retroceder (Backtrack): Si la decisión no fue buena o no llevó a una solución.
+    // Es como "podar" la rama del árbol. Se deshace el paso anterior.
+    quitar proximaDecision de solucionParcial
+
+  // Si ninguna decisión desde este punto llevó a una solución.
+  retornar falso
+            </code></pre>
         </article>
 
         <div class="interactive-zone">
@@ -48,7 +126,26 @@
                     <li>Continúa así. Si en algún momento no puede colocar una reina en una fila, <strong>retrocede</strong> a la fila anterior y mueve la reina de esa fila a una nueva posición segura.</li>
                     <li>Repite el proceso hasta que las 8 reinas estén en el tablero.</li>
                 </ol>
+                <div id="queens-visualizer">
+                    <h4>Visualización Interactiva (4 Reinas)</h4>
+                    <p>Para ilustrar el proceso, aquí tienes una visualización del problema para 4 reinas. Usa los botones para avanzar o retroceder en el algoritmo.</p>
+                    <div id="board-container">
+                        <!-- El tablero SVG se insertará aquí por JavaScript -->
+                    </div>
+                    <div class="visualizer-controls">
+                        <button id="prevBtn" disabled="">&laquo; Anterior</button>
+                        <p id="step-explanation">Paso 0: El tablero está vacío.</p>
+                        <button id="nextBtn">Siguiente &raquo;</button>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="interactive-zone" id="personal-metaphor-zone">
+            <h3>¡Prueba el Backtracking en tu vida!</h3>
+            <input type="text" id="userInput" placeholder="¿Qué te gusta? (ej: montar un mueble)">
+            <button id="applyBtn">Aplícate BT</button>
+            <div id="metaphorOutput" class="hidden"></div>
         </div>
     </main>
     <footer>
